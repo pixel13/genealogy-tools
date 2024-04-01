@@ -6,6 +6,7 @@ export type Command = {
 };
 
 export default async (commands: Record<string, Command>) => {
+  // Stryker disable all
   const answers = await inquirer.prompt([
     {
       type: "list",
@@ -15,5 +16,6 @@ export default async (commands: Record<string, Command>) => {
     },
   ]);
 
+  // Stryker restore all
   commands[answers.tool].execute();
 };

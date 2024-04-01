@@ -1,5 +1,6 @@
 import { Constraint, Constraints, DateRange } from "./types.js";
 import { dateFormat } from "../utils/dateUtils.js";
+import ConstraintError from "./ConstraintError.js";
 
 const MIN_DATE = new Date("0000-01-01");
 const MAX_DATE = new Date("9999-12-31");
@@ -15,13 +16,6 @@ function rangeFromConstraint(constraint: Constraint): DateRange {
   return { to, from };
 }
 
-export class ConstraintError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "ConstraintError";
-  }
-}
-
 export default (constraints: Constraints): DateRange => {
   if (constraints.length === 0) {
     throw new ConstraintError("No constraints given: cannot calculate birthdate");
@@ -32,7 +26,9 @@ export default (constraints: Constraints): DateRange => {
 
   constraints.forEach((constraint) => {
     const range = rangeFromConstraint(constraint);
+    // Stryker disable next-line EqualityOperator: The >= and > operators are interchangeable in this case
     from = range.from > from ? range.from : from;
+    // Stryker disable next-line EqualityOperator: The <= and < operators are interchangeable in this case
     to = range.to < to ? range.to : to;
 
     if (from > to) {

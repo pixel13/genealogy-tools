@@ -7,6 +7,7 @@ export default async (): Promise<Constraints> => {
 
   let collectConstraints = true;
   while (collectConstraints) {
+    // Stryker disable all
     const answers = await inquirer.prompt([
       {
         type: "input",
@@ -40,6 +41,7 @@ export default async (): Promise<Constraints> => {
       },
     ]);
 
+    // Stryker restore all
     const { date, age, addMore } = answers;
     constraints.push({ date: strToDate(date), age });
 

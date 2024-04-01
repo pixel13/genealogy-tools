@@ -15,6 +15,7 @@
     "start": "tsc && node dist/main.js"
   },
   "devDependencies": {
+    "@stryker-mutator/jest-runner": "^8.2.6",
     "@tsconfig/node18": "^18.2.2",
     "@types/inquirer": "^9.0.7",
     "@types/jest": "^29.5.12",

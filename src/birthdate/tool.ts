@@ -1,4 +1,5 @@
-import birthdateCalculator, { ConstraintError } from "./birthdateCalculator.js";
+import birthdateCalculator from "./birthdateCalculator.js";
+import ConstraintError from "./ConstraintError.js";
 import constraintReader from "./constraintReader.js";
 import { dateFormat } from "../utils/dateUtils.js";
 
